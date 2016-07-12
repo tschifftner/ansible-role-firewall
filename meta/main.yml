@@ -1,0 +1,22 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: Tobias Schifftner
+  description: Installs a firewall (shell script that manages iptables) on Debian/Ubuntu linux servers.
+  company: ambimax® GmbH
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+  - name: Ubuntu
+    versions:
+    - precise
+    - trusty
+  galaxy_tags:
+    - ubuntu
+    - debian
+    - firewall
+    - iptables

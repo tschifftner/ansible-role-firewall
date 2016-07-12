@@ -1,0 +1,6 @@
+
+- include: install.yml
+  tags: ['firewall-install']
+
+- include: monit.yml
+  tags: ['firewall-monit']

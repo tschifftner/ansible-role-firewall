@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  vars:
+    travis: true
+    firewall_default_allowed_tcp_ports: [22, 80]
+
+  roles:
+    - ansible-role-firewall

@@ -1,0 +1,42 @@
+- name: 'Copy firewall script'
+  notify: restart firewall
+  template:
+    src: firewall.sh
+    dest: /usr/local/bin/firewall.sh
+    owner: root
+    group: root
+    mode: '0744'
+
+- name: 'Set init script'
+  copy:
+    src: firewall.initd
+    dest: /etc/init.d/firewall
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: 'Set systemd unit file'
+  copy:
+    src: firewall.service
+    dest: /lib/systemd/system/firewall.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: reload systemd
+  when: ansible_distribution == 'Debian'
+
+- name: 'Install cronjob to check if firewall is running'
+  cron:
+    name: 'firewall_uptime_check'
+    user: root
+    special_time: 'hourly'
+    state: "{{ 'present' if firewall_enable_test_cronjob else 'absent' }}"
+    cron_file: firewall
+    job: 'if [ `/sbin/iptables -L | wc -l` -lt 10 ]; then /usr/sbin/service firewall start; fi'
+
+- name: 'Ensure firewall will start at boot'
+  service:
+    name: firewall
+    state: started
+    enabled: yes
+  changed_when: false

@@ -1,0 +1,12 @@
+[Unit]
+Description=Used to start/stop/restart bash firewall script
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/firewall.sh
+ExecStop=/usr/local/bin/firewall.sh stop
+ExecRestart=/usr/local/bin/firewall.sh
+
+[Install]
+WantedBy=multi-user.target

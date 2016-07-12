@@ -1,0 +1,38 @@
+---
+# Cron-Interval in minutes. Set false to disable. Use */5 writing for different interval; Default 0 = hourly
+firewall_enable_test_cronjob: true
+
+# Monit
+firewall_enable_monit_check: false
+
+# Variables for defaults (like SSH)
+firewall_default_allowed_tcp_ports: [22]
+firewall_default_allowed_udp_ports: []
+firewall_default_forwarded_tcp_ports: []
+firewall_default_forwarded_udp_ports: []
+firewall_default_additional_rules: []
+
+# Variables for groups
+firewall_groups_allowed_tcp_ports: []
+firewall_groups_allowed_udp_ports: []
+firewall_groups_forwarded_tcp_ports: []
+firewall_groups_forwarded_udp_ports: []
+firewall_groups_additional_rules: []
+
+#Variables for hosts
+firewall_hosts_allowed_tcp_ports: []
+firewall_hosts_allowed_udp_ports: []
+firewall_hosts_forwarded_tcp_ports: []
+firewall_hosts_forwarded_udp_ports: []
+firewall_hosts_additional_rules: []
+
+firewall_log_dropped_packets: true
+
+#
+# You should never have to overwrite these:
+#
+firewall_allowed_tcp_ports: '{{ (firewall_default_allowed_tcp_ports + firewall_groups_allowed_tcp_ports + firewall_hosts_allowed_tcp_ports) | unique }}'
+firewall_allowed_udp_ports: '{{ (firewall_default_allowed_udp_ports + firewall_groups_allowed_udp_ports + firewall_hosts_allowed_udp_ports) | unique }}'
+firewall_forwarded_tcp_ports: '{{ (firewall_default_forwarded_tcp_ports + firewall_groups_forwarded_tcp_ports + firewall_hosts_forwarded_tcp_ports) | unique }}'
+firewall_forwarded_udp_ports: '{{ (firewall_default_forwarded_udp_ports + firewall_groups_forwarded_udp_ports + firewall_hosts_forwarded_udp_ports) | unique }}'
+firewall_additional_rules: '{{ (firewall_default_additional_rules + firewall_groups_additional_rules + firewall_hosts_additional_rules) | unique }}'

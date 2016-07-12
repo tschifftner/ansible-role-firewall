@@ -1,0 +1,19 @@
+---
+- name: 'Check if monit exists'
+  shell: 'monit --version'
+  register: _firewall_monit
+  changed_when: false
+  ignore_errors: true
+
+- name: 'Ensure monit conf.d exists'
+  file:
+    path: /etc/monit/conf.d/
+    state: directory
+  when: _firewall_monit.rc == 0
+
+- name: 'Enable monit checks'
+  notify: reload monit
+  template:
+    src: 'monit.service'
+    dest: /etc/monit/conf.d/firewall.service
+  when: _firewall_monit.rc == 0

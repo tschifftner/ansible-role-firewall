@@ -1,0 +1,30 @@
+{% if firewall_enable_monit_check %}
+check file firewall.sh with path /usr/local/bin/firewall.sh
+    group firewall
+    if failed permission 744 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+    if size < 400 then alert
+
+check file firewall_test_cronjob with path /etc/cron.d/firewall
+    if failed permission 644 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+
+check file firewall_initd with path /etc/init.d/firewall
+    group firewall
+    if failed permission 755 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+    if size < 400 then alert
+
+{% if ansible_distribution == 'Debian' %}
+check file firewall_systemd with path /lib/systemd/system/firewall.service
+    group firewall
+    if failed permission 751 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+    if size < 200 then alert
+{% endif %}
+
+{% endif %}

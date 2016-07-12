@@ -1,6 +1,6 @@
 ---
 - name: 'Check if monit exists'
-  shell: 'monit --version'
+  command: 'monit --version'
   register: _firewall_monit
   changed_when: false
   ignore_errors: true

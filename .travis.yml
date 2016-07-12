@@ -45,8 +45,8 @@ script:
   - ansible-lint tests/$SITE
 
   # Check if mmonit is reachable
-  - iptables -L | grep dpt:http
-  - iptables -L | grep dpt:ssh
+  - sudo iptables -L | grep dpt:http
+  - sudo iptables -L | grep dpt:ssh
 
 after_failure:
   - ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo

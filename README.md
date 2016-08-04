@@ -32,22 +32,22 @@ firewall_default_additional_rules: []
 
 Used to define firewall settings per group
 ```
-firewall_groups_allowed_tcp_ports: []
-firewall_groups_allowed_udp_ports: []
-firewall_groups_forwarded_tcp_ports: []
-firewall_groups_forwarded_udp_ports: []
-firewall_groups_additional_rules: []
+firewall_group_allowed_tcp_ports: []
+firewall_group_allowed_udp_ports: []
+firewall_group_forwarded_tcp_ports: []
+firewall_group_forwarded_udp_ports: []
+firewall_group_additional_rules: []
 ```
 
 ### Variables for hosts
 
 Used to define firewall settings per host
 ```
-firewall_hosts_allowed_tcp_ports: []
-firewall_hosts_allowed_udp_ports: []
-firewall_hosts_forwarded_tcp_ports: []
-firewall_hosts_forwarded_udp_ports: []
-firewall_hosts_additional_rules: []
+firewall_host_allowed_tcp_ports: []
+firewall_host_allowed_udp_ports: []
+firewall_host_forwarded_tcp_ports: []
+firewall_host_forwarded_udp_ports: []
+firewall_host_additional_rules: []
 ```
 
 ### Enable firewall checks

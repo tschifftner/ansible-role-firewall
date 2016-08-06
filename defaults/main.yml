@@ -6,8 +6,8 @@ firewall_enable_test_cronjob: true
 firewall_enable_monit_check: false
 
 # Variables for defaults (like SSH)
-firewall_default_allowed_tcp_ports: [22]
-firewall_default_allowed_udp_ports: []
+firewall_allowed_default_tcp_ports: [22]
+firewall_allowed_default_udp_ports: []
 firewall_default_forwarded_tcp_ports: []
 firewall_default_forwarded_udp_ports: []
 firewall_default_additional_rules: []
@@ -31,8 +31,8 @@ firewall_log_dropped_packets: true
 #
 # You should never have to overwrite these:
 #
-firewall_allowed_tcp_ports: '{{ (firewall_default_allowed_tcp_ports + firewall_group_allowed_tcp_ports + firewall_host_allowed_tcp_ports) | unique }}'
-firewall_allowed_udp_ports: '{{ (firewall_default_allowed_udp_ports + firewall_group_allowed_udp_ports + firewall_host_allowed_udp_ports) | unique }}'
+firewall_allowed_tcp_ports: '{{ (firewall_allowed_default_tcp_ports + firewall_group_allowed_tcp_ports + firewall_host_allowed_tcp_ports) | unique }}'
+firewall_allowed_udp_ports: '{{ (firewall_allowed_default_udp_ports + firewall_group_allowed_udp_ports + firewall_host_allowed_udp_ports) | unique }}'
 firewall_forwarded_tcp_ports: '{{ (firewall_default_forwarded_tcp_ports + firewall_group_forwarded_tcp_ports + firewall_host_forwarded_tcp_ports) | unique }}'
 firewall_forwarded_udp_ports: '{{ (firewall_default_forwarded_udp_ports + firewall_group_forwarded_udp_ports + firewall_host_forwarded_udp_ports) | unique }}'
 firewall_additional_rules: '{{ (firewall_default_additional_rules + firewall_group_additional_rules + firewall_host_additional_rules) | unique }}'

@@ -4,7 +4,7 @@
 
   vars:
     travis: true
-    firewall_default_allowed_tcp_ports: [22, 80]
+    firewall_allowed_default_tcp_ports: [22, 80]
 
   roles:
     - ansible-role-firewall

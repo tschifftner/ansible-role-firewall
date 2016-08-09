@@ -21,8 +21,8 @@ Available variables are listed below, along with default values (see `defaults/m
 Used to have some default variables
 ```
 # Variables for defaults (like SSH)
-firewall_allowed_default_tcp_ports: [22]
-firewall_allowed_default_udp_ports: []
+firewall_default_allowed_tcp_ports: [22]
+firewall_default_allowed_udp_ports: []
 firewall_default_forwarded_tcp_ports: []
 firewall_default_forwarded_udp_ports: []
 firewall_default_additional_rules: []
@@ -70,7 +70,7 @@ firewall_log_dropped_packets: true
 
     - hosts: server
       vars:
-        firewall_allowed_default_tcp_ports:
+        firewall_default_allowed_tcp_ports:
           - 22 # ssh
           - 80 # http
         

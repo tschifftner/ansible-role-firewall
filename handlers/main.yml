@@ -12,7 +12,10 @@
     enabled: yes
 
 - name: reload systemd
-  command: systemctl daemon-reload
+  systemd:
+    state: reloaded
+    name: systemctl
+    daemon_reload: yes
 
 - name: reload monit
   command: monit reload

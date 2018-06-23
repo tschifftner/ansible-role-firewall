@@ -1,0 +1,37 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          firewall-ipv6
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Crontrol firewall-ipv6
+# Description:       Used to start/stop/restart bash firewall-ipv6 script
+### END INIT INFO
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+   start)
+      echo "Starting firewall-ipv6."
+      /usr/local/bin/firewall-ipv6.sh start
+      ;;
+   stop)
+      echo "Stoppe Firewall..."
+      /usr/local/bin/firewall-ipv6.sh stop
+      ;;
+   restart)
+      echo "Restarting firewall."
+      /usr/local/bin/firewall-ipv6.sh restart
+      ;;
+   reload|force-reload)
+   $0 stop
+   $0 start
+      ;;
+   *)
+      echo "Usage: /etc/init.d/firewall-ipv6 (start|stop|restart)"
+      echo "Test: /etc/init.d/firewall-ipv6 start && sleep 60 && /etc/init.d/firewall-ipv6 stop"
+      exit 1
+      ;;
+esac
+exit 0

@@ -1,9 +1,11 @@
 ---
 # Cron-Interval in minutes. Set false to disable. Use */5 writing for different interval; Default 0 = hourly
 firewall_enable_test_cronjob: true
+firewall_ipv6_enable_test_cronjob: true
 
 # Monit
 firewall_enable_monit_check: false
+firewall_ipv6_enable_monit_check: false
 
 # Variables for defaults (like SSH)
 firewall_default_allowed_tcp_ports: [22]
@@ -29,11 +31,45 @@ firewall_host_additional_rules: []
 firewall_log_dropped_packets: true
 
 #
+# IPv6
+#
+
+# Variables for defaults (like SSH)
+firewall_ipv6_default_allowed_tcp_ports: [22]
+firewall_ipv6_default_allowed_udp_ports: []
+firewall_ipv6_default_forwarded_tcp_ports: []
+firewall_ipv6_default_forwarded_udp_ports: []
+firewall_ipv6_default_additional_rules: []
+
+# Variables for groups
+firewall_ipv6_group_allowed_tcp_ports: []
+firewall_ipv6_group_allowed_udp_ports: []
+firewall_ipv6_group_forwarded_tcp_ports: []
+firewall_ipv6_group_forwarded_udp_ports: []
+firewall_ipv6_group_additional_rules: []
+
+#Variables for hosts
+firewall_ipv6_host_allowed_tcp_ports: []
+firewall_ipv6_host_allowed_udp_ports: []
+firewall_ipv6_host_forwarded_tcp_ports: []
+firewall_ipv6_host_forwarded_udp_ports: []
+firewall_ipv6_host_additional_rules: []
+
+firewall_ipv6_log_dropped_packets: true
+
+#
 # You should never have to overwrite these:
 #
+
 firewall_allowed_tcp_ports: '{{ (firewall_default_allowed_tcp_ports + firewall_group_allowed_tcp_ports + firewall_host_allowed_tcp_ports) | unique }}'
 firewall_allowed_udp_ports: '{{ (firewall_default_allowed_udp_ports + firewall_group_allowed_udp_ports + firewall_host_allowed_udp_ports) | unique }}'
 firewall_forwarded_tcp_ports: '{{ (firewall_default_forwarded_tcp_ports + firewall_group_forwarded_tcp_ports + firewall_host_forwarded_tcp_ports) | unique }}'
 firewall_forwarded_udp_ports: '{{ (firewall_default_forwarded_udp_ports + firewall_group_forwarded_udp_ports + firewall_host_forwarded_udp_ports) | unique }}'
 firewall_additional_rules: '{{ (firewall_default_additional_rules + firewall_group_additional_rules + firewall_host_additional_rules) | unique }}'
+
+firewall_ipv6_allowed_tcp_ports: '{{ (firewall_ipv6_default_allowed_tcp_ports + firewall_ipv6_group_allowed_tcp_ports + firewall_ipv6_host_allowed_tcp_ports) | unique }}'
+firewall_ipv6_allowed_udp_ports: '{{ (firewall_ipv6_default_allowed_udp_ports + firewall_ipv6_group_allowed_udp_ports + firewall_ipv6_host_allowed_udp_ports) | unique }}'
+firewall_ipv6_forwarded_tcp_ports: '{{ (firewall_ipv6_default_forwarded_tcp_ports + firewall_ipv6_group_forwarded_tcp_ports + firewall_ipv6_host_forwarded_tcp_ports) | unique }}'
+firewall_ipv6_forwarded_udp_ports: '{{ (firewall_ipv6_default_forwarded_udp_ports + firewall_ipv6_group_forwarded_udp_ports + firewall_ipv6_host_forwarded_udp_ports) | unique }}'
+firewall_ipv6_additional_rules: '{{ (firewall_ipv6_default_additional_rules + firewall_ipv6_group_additional_rules + firewall_ipv6_host_additional_rules) | unique }}'
 

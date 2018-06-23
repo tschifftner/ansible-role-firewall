@@ -1,0 +1,42 @@
+- name: 'Copy firewall-ipv6 script'
+  notify: restart firewall-ipv6
+  template:
+    src: firewall-ipv6.sh
+    dest: /usr/local/bin/firewall-ipv6.sh
+    owner: root
+    group: root
+    mode: '0744'
+
+- name: 'Set init script'
+  copy:
+    src: firewall-ipv6.initd
+    dest: /etc/init.d/firewall-ipv6
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: 'Set systemd unit file'
+  copy:
+    src: firewall-ipv6.service
+    dest: /lib/systemd/system/firewall-ipv6.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: reload systemd
+  when: ansible_distribution == 'Debian'
+
+- name: 'Install cronjob to check if firewall-ipv6 is running'
+  cron:
+    name: 'firewall_ipv6_uptime_check'
+    user: root
+    special_time: 'hourly'
+    state: "{{ 'present' if firewall_ipv6_enable_test_cronjob else 'absent' }}"
+    cron_file: firewall_ipv6
+    job: 'if [ `/sbin/ip6tables -L | wc -l` -lt 10 ]; then /usr/sbin/service firewall-ipv6 start; fi'
+
+- name: 'Ensure firewall-ipv6 will start at boot'
+  service:
+    name: firewall-ipv6
+    state: started
+    enabled: yes
+  changed_when: false

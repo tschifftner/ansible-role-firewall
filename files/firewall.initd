@@ -14,7 +14,7 @@
 case "$1" in
    start)
       echo "Starting firewall."
-      /usr/local/bin/firewall.sh
+      /usr/local/bin/firewall.sh start
       ;;
    stop)
       echo "Stoppe Firewall..."
@@ -22,7 +22,7 @@ case "$1" in
       ;;
    restart)
       echo "Restarting firewall."
-      /usr/local/bin/firewall.sh
+      /usr/local/bin/firewall.sh restart
       ;;
    reload|force-reload)
    $0 stop

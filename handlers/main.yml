@@ -5,6 +5,12 @@
     state: restarted
     enabled: yes
 
+- name: restart firewall-ipv6
+  service:
+    name: 'firewall-ipv6'
+    state: restarted
+    enabled: yes
+
 - name: reload systemd
   command: systemctl daemon-reload
 

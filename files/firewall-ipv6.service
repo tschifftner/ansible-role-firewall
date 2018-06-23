@@ -1,0 +1,15 @@
+[Unit]
+Description=firewall-ipv6 script
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/firewall-ipv6.sh start
+ExecStop=/usr/local/bin/firewall-ipv6.sh stop
+ExecReload=/usr/local/bin/firewall-ipv6.sh restart
+RemainAfterExit=yes
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

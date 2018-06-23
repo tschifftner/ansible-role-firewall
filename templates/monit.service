@@ -28,3 +28,34 @@ check file firewall_systemd with path /lib/systemd/system/firewall.service
 {% endif %}
 
 {% endif %}
+
+{% if firewall_ipv6_enable_monit_check %}
+check file firewall-ipv6.sh with path /usr/local/bin/firewall-ipv6.sh
+    group firewall
+    if failed permission 744 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+    if size < 400 then alert
+
+check file firewall_ipv6_test_cronjob with path /etc/cron.d/firewall_ipv6
+    if failed permission 644 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+
+check file firewall_ipv6_initd with path /etc/init.d/firewall-ipv6
+    group firewall
+    if failed permission 755 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+    if size < 400 then alert
+
+{% if ansible_distribution == 'Debian' %}
+check file firewall_ipv6_systemd with path /lib/systemd/system/firewall-ipv6.service
+    group firewall
+    if failed permission 751 then alert
+    if failed uid root then alert
+    if failed gid root then alert
+    if size < 200 then alert
+{% endif %}
+
+{% endif %}

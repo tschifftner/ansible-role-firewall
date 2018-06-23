@@ -2,5 +2,8 @@
 - include: install.yml
   tags: ['firewall-install']
 
+- include: install-ipv6.yml
+  tags: ['firewall-install']
+
 - include: monit.yml
   tags: ['firewall-monit']

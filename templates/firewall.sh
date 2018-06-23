@@ -33,7 +33,7 @@ fi
 iptables -F
 iptables -X
 
-if [ $0 == 'stop' ]; then
+if [ "$1" == "stop" ]; then
     exit 0;
 fi
 
@@ -61,7 +61,7 @@ iptables -A INPUT -p udp -m udp --dport {{ port }} -j ACCEPT
 {% endfor %}
 
 # Accept icmp ping requests.
-iptables -A INPUT -p icmp -j ACCEPT
+iptables -A INPUT --protocol icmp -j ACCEPT --match limit --limit 30/minute
 
 # Allow NTP traffic for time synchronization.
 iptables -A OUTPUT -p udp --dport 123 -j ACCEPT

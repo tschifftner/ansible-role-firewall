@@ -13,8 +13,6 @@
 
 - name: reload systemd
   systemd:
-    state: reloaded
-    name: systemctl
     daemon_reload: yes
 
 - name: reload monit

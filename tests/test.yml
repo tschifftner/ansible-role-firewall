@@ -5,6 +5,7 @@
   vars:
     travis: true
     firewall_default_allowed_tcp_ports: [22, 80]
+    firewall_ipv6_default_allowed_tcp_ports: [443]
 
   roles:
     - role_under_test

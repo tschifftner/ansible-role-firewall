@@ -27,12 +27,14 @@ script:
   # Run tests.
   - ${PWD}/tests/test.sh
 
-  # Ensure PHP is installed.
+  # Ensure iptable rules are set.
   - ${DOCKER} iptables -L | grep dpt:http
   - ${DOCKER} iptables -L | grep dpt:ssh
+  - ${DOCKER} ip6tables -L | grep dpt:https
 
 after_failure:
   - ${DOCKER} iptables -L
+  - ${DOCKER} ip6tables -L
   - ${DOCKER} service firewall status
 
 notifications:

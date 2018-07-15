@@ -1,7 +1,6 @@
 ---
 firewall_apt_packages:
   - iptables
-  - ip6tables
 
 # Cron-Interval in minutes. Set false to disable. Use */5 writing for different interval; Default 0 = hourly
 firewall_enable_test_cronjob: true

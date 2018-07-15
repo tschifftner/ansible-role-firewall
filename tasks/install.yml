@@ -1,11 +1,4 @@
-- name: 'Copy firewall script'
-  notify: restart firewall
-  template:
-    src: firewall.sh
-    dest: /usr/local/bin/firewall.sh
-    owner: root
-    group: root
-    mode: '0744'
+---
 
 - name: 'Set init script'
   copy:
@@ -24,6 +17,15 @@
     mode: '0644'
   notify: reload systemd
   when: ansible_distribution == 'Debian'
+
+- name: 'Copy firewall script'
+  notify: restart firewall
+  template:
+    src: firewall.sh
+    dest: /usr/local/bin/firewall.sh
+    owner: root
+    group: root
+    mode: '0744'
 
 - name: 'Install cronjob to check if firewall is running'
   cron:

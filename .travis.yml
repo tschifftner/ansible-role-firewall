@@ -27,15 +27,34 @@ script:
   # Run tests.
   - ${PWD}/tests/test.sh
 
+  # Check the status of firewall.
+  - ${DOCKER} systemctl --no-pager status firewall
+  - ${DOCKER} systemctl --no-pager status firewall | grep 'firewall.service; enabled'
+
+  # Check the status of firewall-ipv6.
+  - ${DOCKER} systemctl --no-pager status firewall-ipv6
+  - ${DOCKER} systemctl --no-pager status firewall-ipv6 | grep 'firewall-ipv6.service; enabled'
+
   # Ensure iptable rules are set.
-  - ${DOCKER} iptables -L | grep dpt:http
-  - ${DOCKER} iptables -L | grep dpt:ssh
-  - ${DOCKER} ip6tables -L | grep dpt:https
+  - |
+    case "${distro}" in
+      "debian8"|"debian9")
+        ${DOCKER} iptables -L | grep dpt:http
+        ${DOCKER} iptables -L | grep dpt:ssh
+        ${DOCKER} ip6tables -L | grep dpt:https
+        ;;
+      "ubuntu1604"|"ubuntu1804")
+        ${DOCKER} iptables -L | grep dpt:80
+        ${DOCKER} iptables -L | grep dpt:22
+        ${DOCKER} ip6tables -L | grep dpt:443
+        ;;
+    esac
 
 after_failure:
   - ${DOCKER} iptables -L
   - ${DOCKER} ip6tables -L
   - ${DOCKER} service firewall status
+  - ${DOCKER} service firewall-ipv6 status
 
 notifications:
   slack: ambimax:2MlPTX9bY9aPxCPhJGxHKIT6

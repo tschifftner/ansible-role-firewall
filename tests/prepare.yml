@@ -7,3 +7,4 @@
       apt:
         pkg: cron
         state: present
+        update_cache: yes

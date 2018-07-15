@@ -29,11 +29,11 @@ script:
 
   # Check the status of firewall.
   - ${DOCKER} systemctl --no-pager status firewall
-  - ${DOCKER} systemctl --no-pager status firewall | grep 'firewall.service; enabled'
+  - ${DOCKER} systemctl --no-pager status firewall | grep 'active (exited)'
 
   # Check the status of firewall-ipv6.
   - ${DOCKER} systemctl --no-pager status firewall-ipv6
-  - ${DOCKER} systemctl --no-pager status firewall-ipv6 | grep 'firewall-ipv6.service; enabled'
+  - ${DOCKER} systemctl --no-pager status firewall-ipv6 | grep 'active (exited)'
 
   # Ensure iptable rules are set.
   - |

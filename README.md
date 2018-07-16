@@ -1,6 +1,6 @@
 # Ansible Role: Firewall
 
-[![Build Status](https://travis-ci.org/tschifftner/ansible-role-firewall.svg)](https://travis-ci.org/tschifftner/ansible-role-firewall)
+[![Build Status](https://travis-ci.org/tschifftner/ansible-role-firewall.svg?branch=master)](https://travis-ci.org/tschifftner/ansible-role-firewall)
 
 Installs a firewall (shell script that manages iptables) on Debian/Ubuntu linux servers.
 

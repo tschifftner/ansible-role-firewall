@@ -1,9 +1,6 @@
 
-- name: Ensure required packages are installed
-  apt:
-    pkg: '{{ item }}'
-    state: present
-  with_items: '{{ firewall_apt_packages }}'
+- name: Install requirements first
+  include: requirements.yml
   tags: ['firewall-install']
 
 - include: install.yml

@@ -1,13 +1,17 @@
+---
 
 - name: Install requirements first
   include: requirements.yml
   tags: ['firewall-install']
 
-- include: install.yml
+- name: Install firewall
+  include: install.yml
   tags: ['firewall-install']
 
-- include: install-ipv6.yml
+- name: Install firewall-ipv6
+  include: install-ipv6.yml
   tags: ['firewall-install']
 
-- include: monit.yml
+- name: Configure monit
+  include: monit.yml
   tags: ['firewall-monit']
